@@ -1,59 +1,45 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Điều khiển LED & Giám sát DHT</title>
-  <style>
-    body {
-      font-family: Arial;
-      background: #f5f7fa;
-      text-align: center;
-      margin-top: 50px;
-    }
-    .container {
-      display: inline-block;
-      padding: 20px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1 { color: #333; }
-    .temp {
-      font-size: 24px;
-      margin: 15px 0;
-      color: #007bff;
-    }
-    button {
-      font-size: 18px;
-      padding: 10px 30px;
-      margin: 10px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .on {
-      background-color: #28a745;
-      color: white;
-    }
-    .off {
-      background-color: #dc3545;
-      color: white;
-    }
-    button:hover {
-      opacity: 0.8;
-    }
-  </style>
+    <meta charset="utf-8">
+    <title>IOT DHT11 + LED Control</title>
+    <style>
+        body { font-family: Arial; text-align: center; background: #f7f7f7; }
+        h1 { color: #333; }
+        .sensor-box {
+            background: white;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .on { background: green; color: white; }
+        .off { background: red; color: white; }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>💡 Điều khiển LED & Cảm biến DHT</h1>
-    <div class="temp">🌡️ Nhiệt độ hiện tại: <b>{{ temp }}</b> °C</div>
-    <div>
-      <a href="/set_led/ON"><button class="on">BẬT LED</button></a>
-      <a href="/set_led/OFF"><button class="off">TẮT LED</button></a>
+    <h1>🌡️ Trạng thái cảm biến DHT11</h1>
+    <div class="sensor-box">
+        <h2>Nhiệt độ: {{ temperature }} °C</h2>
+        <h2>Độ ẩm: {{ humidity }} %</h2>
     </div>
-    <p>Trạng thái LED: <b>{{ led }}</b></p>
-  </div>
+
+    <h1>💡 Điều khiển LED</h1>
+    <p>LED hiện tại: <b>{{ led_status }}</b></p>
+    <a href="/led/ON"><button class="btn on">BẬT LED</button></a>
+    <a href="/led/OFF"><button class="btn off">TẮT LED</button></a>
+
+    <script>
+        setTimeout(() => location.reload(), 3000); // Tự reload mỗi 3 giây
+    </script>
 </body>
 </html>

@@ -1,31 +1,33 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 led_status = "OFF"
-temperature = "Chưa có dữ liệu"
+sensor_data = "Chưa có dữ liệu"
 
-@app.route("/")
+@app.route('/')
 def index():
-    return render_template("index.html", led=led_status, temp=temperature)
+    return render_template('index.html', led_status=led_status, sensor_data=sensor_data)
 
-@app.route("/set_led/<state>")
-def set_led(state):
-    global led_status
-    if state.upper() in ["ON", "OFF"]:
-        led_status = state.upper()
-    return redirect(url_for("index"))
-
-@app.route("/data", methods=["POST"])
+@app.route('/data', methods=['POST'])
 def data():
-    global temperature
-    temperature = request.data.decode("utf-8")
-    print("ESP8266 gửi:", temperature)
+    global sensor_data
+    sensor_data = request.data.decode("utf-8")
+    print("Dữ liệu nhận:", sensor_data)
     return "OK"
 
-@app.route("/led_status")
-def get_led_status():
+@app.route('/led_status')
+def led_status_route():
     return led_status
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+@app.route('/led/<action>')
+def led_control(action):
+    global led_status
+    if action.upper() == "ON":
+        led_status = "ON"
+    elif action.upper() == "OFF":
+        led_status = "OFF"
+    return f"LED {led_status}"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)

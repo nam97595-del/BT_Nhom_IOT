@@ -3,9 +3,9 @@
 #include <Wire.h>
 
 // --- Cấu hình Wi-Fi và server ---
-const char* ssid = "Tang 1";
+const char* ssid = "Tang 2";
 const char* password = "khongcomang";
-const char* server_ip = "192.168.110.201"; // IP của laptop (chạy web.py)
+const char* server_ip = "192.168.2.3"; // IP của laptop (chạy web.py)
 const int server_port = 5000;
 
 // --- Cấu hình I2C ---
