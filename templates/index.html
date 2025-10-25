@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IOT DHT11 + LED Control</title>
+    <style>
+        body { font-family: Arial; text-align: center; background: #f7f7f7; }
+        h1 { color: #333; }
+        .sensor-box {
+            background: white;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .on { background: green; color: white; }
+        .off { background: red; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Xin chào, {{ username }} (Quyền hạn: {{ quyenhan }})</h1>
+
+    <h1>🌡️ Trạng thái cảm biến DHT11</h1>
+    <div class="sensor-box">
+        <h2>Nhiệt độ: {{ temperature }} °C</h2>
+        <h2>Độ ẩm: {{ humidity }} %</h2>
+    </div>
+
+    <h1>💡 Điều khiển LED</h1>
+    <p>LED hiện tại: <b>{{ led_status }}</b></p>
+    <a href="/led/ON"><button class="btn on">BẬT LED</button></a>
+    <a href="/led/OFF"><button class="btn off">TẮT LED</button></a>
+
+    <p><a href="/signout">Đăng xuất</a></p>
+
+    <script>
+        setTimeout(() => location.reload(), 3000);
+    </script>
+</body>
+</html>
