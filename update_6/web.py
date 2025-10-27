@@ -86,7 +86,6 @@ def led_control(action):
     return f"LED{quyenhan} -> {led_statuses[quyenhan]}"
 
 # ===== ESP8266 hỏi trạng thái LED =====
-# ===== ESP8266 hỏi trạng thái LED =====
 @app.route('/led_status')
 def led_status_route():
     key = request.args.get('key')
@@ -138,6 +137,7 @@ def get_updated_data():
         "humidity": humid_val,
         "led_status": led_status
     })
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

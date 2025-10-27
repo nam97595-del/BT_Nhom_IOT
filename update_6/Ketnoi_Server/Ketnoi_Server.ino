@@ -92,11 +92,11 @@ void loop() {
         if (code > 0)
           Serial.printf("[HTTP] POST... Da gui du lieu, code: %d\n", code);
         else
-          Serial.printf("❌ [HTTP] POST... that bai, loi: %s\n", http_post.errorToString(code).c_str());
+          Serial.printf("[HTTP] POST... that bai, loi: %s\n", http_post.errorToString(code).c_str());
           
         http_post.end();
       } else {
-        Serial.printf("❌ [HTTP] POST... Khong the ket noi\n");
+        Serial.printf("[HTTP] POST... Khong the ket noi\n");
       }
     } // Hủy http_post và client_post
     
@@ -128,7 +128,7 @@ void loop() {
             DeserializationError error = deserializeJson(doc, payload);
 
             if (error) {
-              Serial.print("❌ Loi parse JSON: ");
+              Serial.print("Loi parse JSON: ");
               Serial.println(error.c_str());
             } else {
               Serial.println("✅ Parse JSON thanh cong!");
@@ -148,11 +148,11 @@ void loop() {
             }
           }
         } else {
-          Serial.printf("❌ [HTTP] GET... that bai, loi: %s\n", http_get.errorToString(httpCode).c_str());
+          Serial.printf("[HTTP] GET... that bai, loi: %s\n", http_get.errorToString(httpCode).c_str());
         }
         http_get.end();
       } else {
-        Serial.printf("❌ [HTTP] GET... Khong the ket noi\n");
+        Serial.printf("[HTTP] GET... Khong the ket noi\n");
       }
     } // Hủy http_get và client_get
 
