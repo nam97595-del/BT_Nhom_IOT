@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IOT DHT11 + LED Control</title>
+    <style>
+        body { font-family: Arial; text-align: center; background: #f7f7f7; }
+        h1 { color: #333; }
+        .sensor-box {
+            background: white;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .on { background: green; color: white; }
+        .off { background: red; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Xin chào, {{ username }} (Quyền hạn: {{ quyenhan }})</h1>
+
+    <h1>🌡️ Trạng thái cảm biến DHT11</h1>
+    <div class="sensor-box">
+        <h2 id="temperature">Nhiệt độ: {{ temperature }} °C</h2>
+        <h2 id="humidity">Độ ẩm: {{ humidity }} %</h2>
+    </div>
+
+    <h1>💡 Điều khiển LED</h1>
+    <p>LED hiện tại: <b id="led_status">{{ led_status }}</b></p>
+    <a href="/led/ON"><button class="btn on">BẬT LED</button></a>
+    <a href="/led/OFF"><button class="btn off">TẮT LED</button></a>
+
+    <p><a href="/signout">Đăng xuất</a></p>
+
+    <script>
+        // Hàm cập nhật dữ liệu
+        function updateData() {
+            // Dùng fetch để gọi API lấy dữ liệu mới từ server
+            fetch('/get_updated_data')
+                .then(response => response.json()) // Chuyển phản hồi thành JSON
+                .then(data => {
+                    // Cập nhật nội dung trên trang web
+                    document.getElementById('temperature').innerText = `Nhiệt độ: ${data.temperature} °C`;
+                    document.getElementById('humidity').innerText = `Độ ẩm: ${data.humidity} %`;
+                    document.getElementById('led_status').innerText = data.led_status;
+                })
+                .catch(error => console.error('Loi khi cap nhat du lieu:', error));
+        }
+
+        // Gọi hàm updateData mỗi 3 giây
+        setInterval(updateData, 3000);
+    </script>
+</body>
+</html>
